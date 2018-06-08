@@ -165,6 +165,8 @@ return [
          */
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
 
+        LaravelDoctrine\ORM\DoctrineServiceProvider::class,
+
     ],
 
     /*
@@ -218,6 +220,8 @@ return [
          *The MPDF aliase
          */
          'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
+
+         'EntityManager' => LaravelDoctrine\ORM\Facades\EntityManager::class,
 
     ],
 
