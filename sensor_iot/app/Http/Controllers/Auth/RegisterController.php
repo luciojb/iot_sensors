@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Entity\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Repository\UserRepository as repo;
 
-class RegisterController extends Controller
-{
+
+class RegisterController extends Controller {
+	private $repo;
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -35,8 +37,8 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(repo $repo) {
+		$this->repo = $repo;
         $this->middleware('guest');
     }
 
@@ -46,10 +48,9 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
+    protected function validator(array $data) {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -59,13 +60,16 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Entity\User
      */
-    protected function create(array $data)
-    {
+    protected function create(array $data) {
+		$date = new \DateTime('', new \DateTimeZone('America/Sao_Paulo'));
+		$date->format("Y-m-d H:i:s");
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+			'created_at' =>  $date,
+			'updated_at' =>  $date,
             'password' => Hash::make($data['password']),
         ]);
     }

@@ -25,9 +25,9 @@ return [
             'dev'           => env('APP_DEBUG', false),
             'meta'          => env('DOCTRINE_METADATA', 'annotations'),
             'connection'    => env('DB_CONNECTION', 'mysql'),
-            'namespaces'    => [],
+            'namespaces'    => [ 'App\Entity'],
             'paths'         => [
-                base_path('app/Entities')
+                base_path('app/Entity')
             ],
             'repository'    => Doctrine\ORM\EntityRepository::class,
             'proxies'       => [
@@ -198,7 +198,7 @@ return [
      |  Enables the Doctrine Presence Verifier for Validation
      |
      */
-    'doctrine_presence_verifier' => true,
+    'doctrine_presence_verifier' => false,
 
     /*
      |--------------------------------------------------------------------------
