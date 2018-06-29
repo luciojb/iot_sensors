@@ -35,7 +35,7 @@ ENGINE = InnoDB;
 -- Table `sensor_iot`.`sensor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sensor_iot`.`sensor` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(10) NOT NULL,
   `last_active` TIMESTAMP NOT NULL,
   `latest_data_readed` INT NULL,
@@ -72,7 +72,7 @@ ENGINE = InnoDB;
 -- Table `sensor_iot`.`sensor_data`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sensor_iot`.`sensor_data` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `temperature` FLOAT NOT NULL,
   `humidity` FLOAT NOT NULL,
   `sensor_id` INT NOT NULL,
