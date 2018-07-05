@@ -7,12 +7,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
-  *@ORM\Entity
-  *@ORM\Entity(repositoryClass="App\Repository\UserRepository")
+  *@ORM\Entity()
   *@ORM\Table(name="users")
   *@ORM\HasLifecycleCallbacks()
   */
 class User extends Authenticatable {
+
+	public function __construct() {
+        $this->sensors = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 	/**
 	*@var integer $id
@@ -67,11 +70,21 @@ class User extends Authenticatable {
 		'password', 'remember_token',
     ];
 
+	/**
+	* Many Users have Many Sensors.
+	* @ORM\ManyToMany(targetEntity="App\Entity\Sensor")
+	* @ORM\JoinTable(name="users_has_sensor",
+	*      joinColumns={@ORM\JoinColumn(name="users_id", referencedColumnName="id")},
+	*      inverseJoinColumns={@ORM\JoinColumn(name="sensor_id", referencedColumnName="id")}
+	*      )
+	*/
+	private $sensors;
+
 	public function getId() {
 		return $this->id;
 	}
 
-    public function setId(integer $id) {
+    public function setId($id) {
         $this->id = $id;
         return $this;
     }
@@ -120,5 +133,14 @@ class User extends Authenticatable {
         $this->updatedAt = $updatedAt;
         return $this;
     }
+
+	public function getSensors() {
+	    return $this->sensors;
+	}
+
+	public function setSensors($sensors) {
+	    $this->sensors = $sensors;
+	    return $this;
+	}
 
 }

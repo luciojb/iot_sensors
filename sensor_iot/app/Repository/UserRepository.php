@@ -1,6 +1,8 @@
 <?php
 namespace App\Repository;
+
 use Doctrine\ORM\EntityManager as em;
+use App\Repository\GenericRepository;
 
 class UserRepository extends GenericRepository {
 
@@ -18,5 +20,4 @@ class UserRepository extends GenericRepository {
 		}
 	}
 
-	
 }

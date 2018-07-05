@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-	<a href="{{ route('registerSensor') }}" class="btn btn-primary col-md-2">Add Sensor</a>
+	<a href="{{ route('sensors.create') }}" class="btn btn-primary col-md-2">Add Sensor</a>
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="card">

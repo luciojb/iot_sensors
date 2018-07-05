@@ -30,10 +30,6 @@ class SensorController extends GenericController {
       return redirect()->back();
   }
 
-  public function retrieve() {
-      return View('admin.index')->with(['Data' => $this->repo->retrieve()]);
-  }
-
   public function delete() {
       $id = Input::get('id');
       $data = $this->repo->postOfId($id);

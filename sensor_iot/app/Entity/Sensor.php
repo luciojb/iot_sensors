@@ -4,9 +4,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
-  *@ORM\Entity
+  *@ORM\Entity()
   *@ORM\Table(name="sensor")
-  *@ORM\Entity(repositoryClass="App\Repository\SensorRepository")
   *@ORM\HasLifecycleCallbacks()
   */
 class Sensor {
@@ -20,9 +19,21 @@ class Sensor {
 	private $id;
 
 	/**
-	 * @ORM\Column(type="string")
+	 * @ORM\Column(type="string", nullable=false)
 	 */
 	private $name;
+
+	/**
+	 * @ORM\Column(name="last_active", type="datetimetz", nullable=false)
+	 */
+	private $lastActive;
+
+	/**
+     * One Sensor has One Latest Data.
+     * @ORM\OneToOne(targetEntity="Data")
+     * @ORM\JoinColumn(name="latest_data_readed", referencedColumnName="id")
+     */
+	private $latest_data;
 
 	public function getId() {
 	  return $this->id;
@@ -35,4 +46,23 @@ class Sensor {
 	public function setName($name) {
 	  $this->name = $name;
 	}
+
+	public function getLastActive() {
+	    return $this->lastActive;
+	}
+
+	public function setLastActive($lastActive) {
+	    $this->lastActive = $lastActive;
+	    return $this;
+	}
+
+	      public function getLatestData() {
+	    return $this->latest_data;
+	}
+
+	public function setLatestData($latest_data) {
+	    $this->latest_data = $latest_data;
+	    return $this;
+	}
+
 }

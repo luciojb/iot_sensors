@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-use App\Validation\GenericValidator;
 
 class GenericController extends Controller {
   private $repo;

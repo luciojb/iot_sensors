@@ -51,7 +51,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `sensor_iot`.`users_has_sensor` (
   `users_id` INT NOT NULL,
   `sensor_id` INT NOT NULL,
-  `date_added` TIMESTAMP NOT NULL,
   PRIMARY KEY (`users_id`, `sensor_id`),
   INDEX `fk_users_has_sensor_sensor1_idx` (`sensor_id` ASC),
   INDEX `fk_users_has_sensor_users_idx` (`users_id` ASC),
