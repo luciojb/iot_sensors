@@ -8,6 +8,11 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
+					@if (session()->has('message'))
+						<span class="alert alert-success">
+							<strong>{{ session()->first('message') }}</strong>
+						</span>
+					@endif
                     <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                         @csrf
 
@@ -59,7 +64,7 @@
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
-                        </div>
+                        </div><br/>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
