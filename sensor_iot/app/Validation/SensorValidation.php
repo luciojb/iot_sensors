@@ -2,10 +2,10 @@
 namespace App\Validation;
 use Validator;
 
-class SensorValidator {
+class SensorValidation {
 
 	public static function validate($input) {
-	  $rules = [ 'name' => 'Required|Min:3|Max:5|alpha_spaces',];
+	  $rules = [ 'name' => 'Required|Min:3|Max:5',];
 	  return Validator::make($input, $rules);
 	}
 

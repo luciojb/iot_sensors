@@ -11,10 +11,10 @@ class SensorRepository extends GenericRepository {
 	}
 
 	public function findById($id) {
-		return $this->em->getRepository($this->class)->findOneById(['id' => $id]);
+		return $this->getEntityManager()->getRepository($this->getClass())->findOneById(['id' => $id]);
 	}
 
 	public function findByName($name) {
-		return $this->em->getRepository($this->class)->findOneBy(['name' => $name]);
+		return $this->getEntityManager()->getRepository($this->getClass())->findOneBy(['name' => $name]);
 	}
 }

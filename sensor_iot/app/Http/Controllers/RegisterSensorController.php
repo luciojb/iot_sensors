@@ -7,23 +7,12 @@ use App\Repository\UserRepository as userRepo;
 use App\Repository\SensorRepository as sensorRepo;
 use App\Http\Controllers\GenericController;
 use Illuminate\Http\Request;
+use App\Validation\SensorValidation;
 
 class RegisterSensorController extends GenericController {
 	private $userRepo;
 	private $sensorRepo;
 
-	/**
-	* Where to redirect users after registration.
-	*
-	* @var string
-	*/
-	protected $redirectTo = '/sensors';
-
-	/**
-	* Create a new controller instance.
-	*
-	* @return void
-	*/
 	public function __construct(userRepo $userRepo, sensorRepo $sensorRepo) {
 		$this->userRepo = $userRepo;
 		$this->sensorRepo = $sensorRepo;
@@ -45,17 +34,27 @@ class RegisterSensorController extends GenericController {
 
 	protected function store(Request $request) {
 		$name = $request->get('name');
-        $validate = SensorValidator::validate($all);
+        $validate = SensorValidation::validate(['name' => $name]);
         if (!$validate->passes()) {
             return redirect()->back()->withInput()->withErrors($validate);
         }
         $sensor = $this->sensorRepo->findByName($name);
         if (!is_null($sensor)) {
+			error_log('Adding sensor');
+			$user = \Auth::user();
+			$user = $this->userRepo->findById($user['id']);
 
-            $this->repo->update($Id, $all);
-            Session::flash('msg', 'edit success');
+			$user->getSensors()->add($sensor);
+
+			$return = $this->userRepo->update($user);
+
+			if ($return['error']) {
+				return redirect()->back()->withInput()->withErrors(['createError' => 'Already exists or there was an error']);
+			}
+
+            Session::flash('msg', 'added success');
         } else {
-            Session::flash('msg', 'no sensor');
+            return redirect()->back()->withInput()->withErrors(['createError' => 'No sensor with this identifier']);
         }
         return redirect()->back();
 	}

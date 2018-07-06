@@ -19,9 +19,9 @@ USE `sensor_iot` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sensor_iot`.`users` (
   `id` INT NOT NULL	AUTO_INCREMENT,
-  `name` VARCHAR(255) NOT NULL,
-  `email` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(255) NOT NULL,
+  `name` VARCHAR(255),
+  `email` VARCHAR(255),
+  `password` VARCHAR(255),
   `remember_token` VARCHAR(100) NULL,
   `created_at` TIMESTAMP NULL,
   `updated_at` TIMESTAMP NULL,
