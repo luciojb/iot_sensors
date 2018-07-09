@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Repository\UserRepository as repo;
 use Illuminate\Http\Request;
+use Session;
 
 class RegisterController extends Controller {
 	private $repo;
@@ -80,9 +81,10 @@ class RegisterController extends Controller {
 				}
 	        } catch (\Exception $exception) {
 				error_log($exception->getMessage());
-	            return redirect()->back()->with('message', 'Unable to create new user.');
+	            return redirect()->back()->withInput()->withErrors(['message' => 'Already exists or there was an error']);
 	        }
-	        return redirect()->back()->with('message', 'Successfully created a new account');
+			Session::flash('message', 'Successfully created');
+	        return redirect()->back();
 	    }
 
     /**

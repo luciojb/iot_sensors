@@ -10,7 +10,7 @@
                 <div class="card-body">
 					@if (session()->has('message'))
 						<span class="alert alert-success">
-							<strong>{{ session()->first('message') }}</strong>
+							<strong>{{ session('message') }}</strong>
 						</span>
 					@endif
                     <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
