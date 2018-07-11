@@ -29,54 +29,54 @@ class Data {
 	private $temperature;
 
 	/**
-     * @ORM\ManyToOne(targetEntity="Sensor")
-     * @ORM\JoinColumn(name="sensor_id", referencedColumnName="id")
-     */
-	private $sensor;
-
-	/**
 	 * @ORM\Column(name="readed_at", type="datetimetz", nullable=false)
 	 */
 	private $readedAt;
 
+	/**
+	 * @ORM\ManyToOne(targetEntity="Sensor", inversedBy="data")
+	 * @ORM\JoinColumn(name="sensor_id", referencedColumnName="id")
+	 */
+	private $sensor;
+
 	public function getId() {
-	  return $this->id;
+		return $this->id;
 	}
 
 	public function getHumidity() {
-	    return $this->humidity;
+		return $this->humidity;
 	}
 
 	public function setHumidity($humidity) {
-	    $this->humidity = $humidity;
-	    return $this;
+		$this->humidity = $humidity;
+		return $this;
 	}
 
-	      public function getTemperature() {
-	    return $this->temperature;
+	public function getTemperature() {
+		return $this->temperature;
 	}
 
 	public function setTemperature($temperature) {
-	    $this->temperature = $temperature;
-	    return $this;
+		$this->temperature = $temperature;
+		return $this;
 	}
 
-	      public function getSensor() {
-	    return $this->sensor;
-	}
-
-	public function setSensor($sensor) {
-	    $this->sensor = $sensor;
-	    return $this;
-	}
-
-	      public function getReadedAt() {
-	    return $this->readedAt;
+	public function getReadedAt() {
+		return $this->readedAt;
 	}
 
 	public function setReadedAt($readedAt) {
-	    $this->readedAt = $readedAt;
-	    return $this;
+		$this->readedAt = $readedAt;
+		return $this;
+	}
+
+	public function getSensor() {
+		return $this->sensor;
+	}
+
+	public function setSensor($sensor) {
+		$this->sensor = $sensor;
+		return $this;
 	}
 
 }

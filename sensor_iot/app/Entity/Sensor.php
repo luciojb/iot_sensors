@@ -10,6 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
   */
 class Sensor {
 
+	public function __construct() {
+        $this->data = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 	/**
 	*@var integer $id
 	*@ORM\Column(name="id", type="integer", unique=true, nullable=false)
@@ -35,6 +39,13 @@ class Sensor {
      */
 	private $latest_data;
 
+	/**
+     * One Sensor has many data.
+     * @ORM\OneToMany(targetEntity="Data", mappedBy="sensor", fetch="EXTRA_LAZY")
+	 * @ORM\OrderBy({"readedAt" = "DESC"})
+     */
+	private $data;
+
 	public function getId() {
 	  return $this->id;
 	}
@@ -56,13 +67,22 @@ class Sensor {
 	    return $this;
 	}
 
-	      public function getLatestData() {
-	    return $this->latest_data;
+	public function getLatestData() {
+		return $this->latest_data;
 	}
 
 	public function setLatestData($latest_data) {
-	    $this->latest_data = $latest_data;
-	    return $this;
+		$this->latest_data = $latest_data;
+		return $this;
+	}
+
+	public function getData() {
+		return $this->data;
+	}
+
+	public function setData($data) {
+		$this->data = $data;
+		return $this;
 	}
 
 }

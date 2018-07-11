@@ -86,41 +86,4 @@ class RegisterController extends Controller {
 			Session::flash('message', 'Successfully created');
 	        return redirect()->back();
 	    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Entity\User
-     */
-    // protected function create(array $data) {
-	// 	$date = new \DateTime('', new \DateTimeZone('America/Sao_Paulo'));
-	// 	$date->format("Y-m-d H:i:s");
-	// 	// $validate = $this->validator($data);
-	// 	// if ($validate->passes()) {
-	// 	// 	$user = new User();
-	// 	//
-	// 	// 	$user
-	// 	// 		->setName($data['name'])
-	// 	// 		->setEmail($data['email'])
-	// 	// 		->setCreatedAt($date)
-	// 	// 		->setUpdatedAt($date)
-	// 	// 		->setPassword(Hash::make($data['password']));
-	// 	// 	$return = $this->repo->create($user);
-	// 	// 	if ($return['error']) {
-	// 	// 		return redirect()->back()->withInput()->withErrors(['createError' => 'Already exists or there was an error']);
-	// 	// 	}
-	// 	//
-	// 	// } else {
-	// 	// 	return redirect()->back()->withInput()->withErrors($validate);
-	// 	// }
-	//
-    //     return User::create([
-    //         'name' => $data['name'],
-    //         'email' => $data['email'],
-	// 		'created_at' =>  $date,
-	// 		'updated_at' =>  $date,
-    //         'password' => Hash::make($data['password']),
-    //     ]);
-    // }
 }

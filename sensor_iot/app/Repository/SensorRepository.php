@@ -10,10 +10,6 @@ class SensorRepository extends GenericRepository {
 		parent::__construct("App\Entity\Sensor", $em);
 	}
 
-	public function findById($id) {
-		return $this->getEntityManager()->getRepository($this->getClass())->findOneById(['id' => $id]);
-	}
-
 	public function findByName($name) {
 		return $this->getEntityManager()->getRepository($this->getClass())->findOneBy(['name' => $name]);
 	}

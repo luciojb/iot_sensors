@@ -2,11 +2,6 @@
 
 @section('content')
 <div class="container">
-	@if (session()->has('msg'))
-		<span class="alert alert-success">
-			<strong>{{ session()->first('msg') }}</strong>
-		</span>
-	@endif
     <div class="row justify-content-center">
 		<div class="col-md-8">
             <div class="card">
@@ -33,13 +28,18 @@
 								@endif
                             </div>
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Add') }}
-                                </button>
-                            </div>
+						@if (session()->has('msg'))
+							<span class="alert alert-success mt-4">
+								<strong>{{ session('msg') }}</strong>
+							</span>
+						@endif
+                        <div class="form-group row m-0 justify-content-center">
+                            <button type="submit" class="btn btn-primary col-md-2 m-2">
+                                {{ __('Add') }}
+                            </button>
+                            <a href="{{route('home')}}" class="btn btn-secondary col-md-2 m-2">
+                                {{ __('Cancel') }}
+                            </a>
                         </div>
                     </form>
                 </div>

@@ -6,7 +6,7 @@ echo "<h2>TCP/IP Connection</h2>\n";
 $service_port = 15555;
 
 /* Set the IP address for the target host. */
-$address = gethostbyname('192.168.2.13');
+$address = gethostbyname('192.168.100.145');
 
 /* Create a TCP/IP socket. */
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);

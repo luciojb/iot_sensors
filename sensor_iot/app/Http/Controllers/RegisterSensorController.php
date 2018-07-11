@@ -8,6 +8,7 @@ use App\Repository\SensorRepository as sensorRepo;
 use App\Http\Controllers\GenericController;
 use Illuminate\Http\Request;
 use App\Validation\SensorValidation;
+use Session;
 
 class RegisterSensorController extends GenericController {
 	private $userRepo;
@@ -29,7 +30,7 @@ class RegisterSensorController extends GenericController {
 	* @return \Illuminate\Http\Response
 	*/
 	public function index() {
-		return view('sensor/index');
+		return view('sensor/index', $this->sensors());
 	}
 
 	protected function store(Request $request) {
@@ -57,6 +58,12 @@ class RegisterSensorController extends GenericController {
             return redirect()->back()->withInput()->withErrors(['createError' => 'No sensor with this identifier']);
         }
         return redirect()->back();
+	}
+
+	private function sensors() {
+		$user = \Auth::user();
+		$user = $this->userRepo->findById($user['id']);
+		return ['sensors' => $user->getSensors()->toArray()];
 	}
 
 	protected function create() {

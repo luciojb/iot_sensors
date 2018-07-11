@@ -7,7 +7,7 @@
 // 		$c->disconnect();
 // 	});
 	
-// 	$c->connect('192.168.2.13', 15200);
+// 	$c->connect('192.168.100.145', 15200);
 // 	$c->loopForever();
 
 // 	echo "Finished\n";
@@ -21,7 +21,7 @@
 // 	$c->disconnect();
 // });
 
-// 	$c->connect('192.168.2.13', 15200);
+// 	$c->connect('192.168.100.145', 15200);
 // 	$c->loopForever();
 
 // 	echo "Finished\n";
@@ -33,7 +33,7 @@ $client->onMessage('message');
 
 function pub($data) {
 	global $client;
-	$client->connect("192.168.2.13", 15200);
+	$client->connect("192.168.100.145", 15200);
 	$client->publish('sensor', $data, 1, 0);
 	$client->loop();
 	
