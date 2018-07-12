@@ -1,5 +1,4 @@
-[15:36, 18/5/2018] Lúcio:
-[15:36, 18/5/2018] Lúcio: CREATE SCHEMA IF NOT EXISTS `sensor_db` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `sensor_db` DEFAULT CHARACTER SET utf8 ;
 USE `sensor_db` ;
 
 -- -----------------------------------------------------
