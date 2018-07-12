@@ -17,15 +17,15 @@ mysqli_report(MYSQLI_REPORT_ALL);
 
 
 //Variables
-// $address = '192.168.100.150';
-$address = '192.168.100.145';
+$address = '192.168.100.150';
+// $address = '192.168.100.145';
 $port = 15555;
 $buff = [];
 $database = new Connection();
 
 //Constants
 define("MAX_TEMPERATURE", 35);
-define("MIN_TEMPERATURE", 5);
+define("MIN_TEMPERATURE", 1);
 define("MAX_HUMIDITY", 100);
 define("MIN_HUMIDITY", 21);
 
@@ -114,7 +114,7 @@ function processInfo($content) {
 					}
 					$buff[$id]->inserirFim($id, $temp, $um);
 					echo "Nodos = ".$buff[$id]->contarNodos()."\n";
-					if ($buff[$id]->contarNodos() == 10) {
+					if ($buff[$id]->contarNodos() == 60) {
 						echo "60 nodos!! \n";
 						//Calcular média e salvar em $data
 						$data = $buff[$id]->calculaMédia();

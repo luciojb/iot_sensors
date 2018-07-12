@@ -2,7 +2,7 @@
 define('DB_SERVER', 'localhost');
 define('DB_NAME', 'sensor_db');
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'root');
+define('DB_PASSWORD', '');
 
 class Connection {
 	var $db, $conn, $count = 0, $success = false;

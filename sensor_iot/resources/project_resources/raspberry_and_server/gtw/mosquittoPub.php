@@ -1,30 +1,5 @@
 <?php
 
-// function mqttSend($data) {
-// 	$c = new Mosquitto\Client;
-// 	$c->onConnect(function() use ($c, $data) {
-// 		$c->publish('sensor', $data, 0);
-// 		$c->disconnect();
-// 	});
-	
-// 	$c->connect('192.168.100.145', 15200);
-// 	$c->loopForever();
-
-// 	echo "Finished\n";
-// }
-
-// $data = 'dsjfsnfvvjbsdfnskjbfdfnsdjfosndgvojasdf';
-
-// $c = new Mosquitto\Client;
-// $c->onConnect(function() use ($c, $data) {
-// 	$c->publish('sensor', $data, 0);
-// 	$c->disconnect();
-// });
-
-// 	$c->connect('192.168.100.145', 15200);
-// 	$c->loopForever();
-
-// 	echo "Finished\n";
 $client = new Mosquitto\Client();
 $client->onConnect('connect');
 $client->onDisconnect('disconnect');
@@ -36,9 +11,9 @@ function pub($data) {
 	$client->connect("192.168.100.145", 15200);
 	$client->publish('sensor', $data, 1, 0);
 	$client->loop();
-	
+
 	sleep(2);
-	
+
 	$client->disconnect();
 }
 
