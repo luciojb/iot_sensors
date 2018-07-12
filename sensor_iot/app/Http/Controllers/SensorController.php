@@ -8,6 +8,7 @@ use App\Entity\Sensor;
 use App\Repository\UserRepository as userRepo;
 use App\Repository\SensorRepository as sensorRepo;
 use App\Http\Controllers\GenericController;
+use PDF;
 
 class SensorController extends GenericController {
 	private $sensorRepo;
@@ -61,6 +62,10 @@ class SensorController extends GenericController {
 		return view('sensor/show', ['sensor' => $sensor, 'data' => $jsonarr]);
 	}
 
+	public function index() {
+		return redirect('sensors');
+	}
+
 	public function remove($id=NULL) {
 		if($id == null) {
 			return redirect()->back();
@@ -70,5 +75,33 @@ class SensorController extends GenericController {
 			return redirect()->back();
 		}
 		return view('sensor/confirm', ['id' => $sensor->getId(), 'name' => $sensor->getName()]);
+	}
+
+	public function pdf($id=NULL) {
+		if($id == null) {
+			return redirect()->back();
+		}
+
+		$sensor = $this->sensorRepo->findById($id);
+		if (empty($sensor)) {
+			return redirect()->back();
+		}
+
+		$data = $sensor->getData()->slice(0, 20);
+		$jsonarr = [];
+		foreach ($data as $d) {
+			$jsonarr['categories'][] = $d->getReadedAt()->format('Y-m-d H:i');
+			$jsonarr['temperatures'][] = $d->getTemperature();
+			$jsonarr['humidities'][] = $d->getHumidity();
+		}
+
+		$data = [
+			'sensor' => $sensor,
+			'data'  => $jsonarr
+		];
+		$pdf = PDF::loadView('sensor/pdfSource', $data);
+		error_log('view loaded');
+		return $pdf->stream('document.pdf');
+
 	}
 }

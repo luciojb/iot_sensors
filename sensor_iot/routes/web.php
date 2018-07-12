@@ -21,3 +21,4 @@ Route::get('/sensors/index', 'RegisterSensorController@index')->name('home');
 Route::resource('sensors','RegisterSensorController');
 Route::resource('sensor','SensorController');
 Route::get('/sensor/remove/{id}', 'SensorController@remove')->name('sensor.remove');
+Route::get('/sensor/pdf/{id}', 'SensorController@pdf')->name('sensor.pdf');
