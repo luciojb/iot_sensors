@@ -59,6 +59,16 @@ class SensorController extends GenericController {
 			$jsonarr['humidities'][] = $d->getHumidity();
 		}
 		return view('sensor/show', ['sensor' => $sensor, 'data' => $jsonarr]);
+	}
 
+	public function remove($id=NULL) {
+		if($id == null) {
+			return redirect()->back();
+		}
+		$sensor = $this->sensorRepo->findById($id);
+		if (empty($sensor)) {
+			return redirect()->back();
+		}
+		return view('sensor/confirm', ['id' => $sensor->getId(), 'name' => $sensor->getName()]);
 	}
 }

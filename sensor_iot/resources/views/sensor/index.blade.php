@@ -39,12 +39,8 @@
 					</li>
 				</ul>
 				<div class="card-body text-center">
-					<a href="{{route('sensor.show', $s->getId())}}" class="btn btn-info col-md-4">View Data</a>
-					<form action="{{action('SensorController@destroy', $s->getId())}}" method="post">
-						@csrf
-						<input name="_method" type="hidden" value="DELETE">
-						<button class="btn btn-danger col-md-4 mt-4" type="submit">Unlink</button>
-					</form>
+					<a href="{{route('sensor.show', $s->getId())}}" class="btn btn-info btn-md">View Data</a>
+					<a href="{{route('sensor.remove', $s->getId())}}" class="btn btn-danger btn-md">Remove</a>
 				</div>
 			</div>
 		@endforeach
@@ -52,5 +48,7 @@
 			<h3>There are no sensors registered. Start by adding a known sensor</h3>
 		@endif
     </div>
+
+
 </div>
 @endsection
