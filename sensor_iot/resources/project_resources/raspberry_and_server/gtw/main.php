@@ -96,6 +96,7 @@ function processInfo($content) {
 	$sensorInfo = [];
 
 	foreach ($sensor as $property) {
+		error_log($property);
 		$property = explode(':', $property);
 		//[key, value]
 		$sensorInfo[$property[0]] = $property[1];

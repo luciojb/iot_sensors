@@ -1,6 +1,6 @@
 <?php
 require ('applicationDatabase.php');
-define('BROKER', '192.168.100.145');
+define('BROKER', '192.168.100.150');
 define('PORT', 15200);
 define('CLIENT_ID', getmypid());
 
