@@ -90,47 +90,45 @@ while (true) {
 socket_close($sock);
 
 function processInfo($content) {
-	echo $content."\n";
 	global $buff, $database, $client;
 	$sensor = explode(';', $content);
 	$sensorInfo = [];
 
 	foreach ($sensor as $property) {
-		error_log($property);
 		$property = explode(':', $property);
 		//[key, value]
 		$sensorInfo[$property[0]] = $property[1];
 	}
 
 	if (!empty($sensorInfo) &&
-			!empty($id = $sensorInfo['identifier']) &&
-			!empty($temp = $sensorInfo['temperature']) &&
-			!empty($um = $sensorInfo['humidity'])
-			) {
-				echo "data is set \n";
-				if (validateData($sensorInfo) && validateData($sensorInfo, 'h')) {
-					echo "data is valid \n";
-					if (empty($buff[$id])) {
-						$buff[$id] = new ListaCircular();
-					}
-					$buff[$id]->inserirFim($id, $temp, $um);
-					echo "Nodos = ".$buff[$id]->contarNodos()."\n";
-					if ($buff[$id]->contarNodos() == 60) {
-						echo "60 nodos!! \n";
-						//Calcular média e salvar em $data
-						$data = $buff[$id]->calculaMédia();
-						pub($data);
-						$buff[$id] = new ListaCircular();
-					}
-					if (! $link = $database->connect()) {
-						echo $link;
-						echo "Não foi possível conectar!! \n";
-					} else {
-						$database->saveData($sensorInfo);
-						echo "Salvo data \n";
-					}
+		!empty($id = $sensorInfo['identifier']) &&
+		!empty($temp = $sensorInfo['temperature']) &&
+		!empty($um = $sensorInfo['humidity'])
+		) {
+			echo "data is set \n";
+			if (validateData($sensorInfo) && validateData($sensorInfo, 'h')) {
+				echo "data is valid \n";
+				if (empty($buff[$id])) {
+					$buff[$id] = new ListaCircular();
+				}
+				$buff[$id]->inserirFim($id, $temp, $um);
+				echo "Nodos = ".$buff[$id]->contarNodos()."\n";
+				if ($buff[$id]->contarNodos() == 60) {
+					echo "60 nodos!! \n";
+					//Calcular média e salvar em $data
+					$data = $buff[$id]->calculaMédia();
+					pub($data);
+					$buff[$id] = new ListaCircular();
+				}
+				if (! $link = $database->connect()) {
+					echo $link;
+					echo "Não foi possível conectar!! \n";
+				} else {
+					$database->saveData($sensorInfo);
+					echo "Salvo data \n";
 				}
 			}
+		}
 }
 
 function validateData($sensor, $type = 't') {

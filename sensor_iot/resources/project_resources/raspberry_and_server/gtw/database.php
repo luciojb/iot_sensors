@@ -22,7 +22,7 @@ class Connection {
 	}
 
 	public function insert($sensorData) {
-		if ($st = $this->conn->prepare("INSERT INTO sensor ('identifier, humidity, temperatue') VALUES (?, ?, ?)")) {
+		if ($st = $this->conn->prepare("INSERT INTO sensor (identifier, humidity, temperature) VALUES (?, ?, ?)")) {
 			$st->bind_param('sdd', $sensorData['identifier'], $sensorData['humidity'], $sensorData['temperature']);
 			return $st->execute();
 		}
