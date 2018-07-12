@@ -1,7 +1,7 @@
 #include <DHT.h>
 #include <SPI.h>
 #include <UIPEthernet.h>
- 
+
 #define DHTPIN 7 // pino que estamos conectando
 #define DHTTYPE DHT22 // DHT 22
 
@@ -65,12 +65,12 @@ void senseData() {
 void sendData(float umidade, float temperatura) {
   //Todo: send data
   Serial.println("Send data");
-  String message = "humidity:";
+  String message = "identifier:";
+  message.concat(id);
+  message.concat(";humidity:");
   message.concat(umidade);
   message.concat(";temperature:");
   message.concat(temperatura);
-  message.concat(";identifier:");
-  message.concat(id);
   if (client.connected()) {
       Serial.println("Disponível");
       client.println(message);
@@ -85,7 +85,6 @@ void sendData(float umidade, float temperatura) {
       Serial.println("Falha ao conectar.");
       Serial.println(Ethernet.localIP());
     }
-    
+
   }
 }
-
