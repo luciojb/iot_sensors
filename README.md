@@ -18,7 +18,7 @@ Uso dos frameworks: Laravel, Bootstrap e Doctrine
 
 5.1. pear mail2 (raspberry)
 
-6. mosquitto-PHP (pc & raspberry), encontrado aqui: [stack overflow](https://stackoverflow.com/questions/37391010/mosquitto-php-library-in-raspberry-and-windows)
+6. mosquitto-PHP (pc & raspberry), encontrado aqui: [ubuntu](https://www.vultr.com/docs/how-to-install-mosquitto-mqtt-broker-server-on-ubuntu-16-04) e [raspberry](https://stackoverflow.com/questions/37391010/mosquitto-php-library-in-raspberry-and-windows)
 
 7. Bibliotecas Arduino:
 
